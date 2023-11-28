@@ -42,7 +42,7 @@ return {
 					gitsigns = true,
 					nvimtree = true,
 					treesitter = true,
-					notify = false,
+					notify = true,
 					mini = false,
 					which_key = true,
 					native_lsp = {
