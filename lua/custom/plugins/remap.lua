@@ -70,7 +70,7 @@ nmap("<leader>x", "<cmd>!chmod +x %<CR>", "Grant e[X]ecutable")
 nmap("<leader>gs", vim.cmd.Git, "Open Vim-fugitive")
 
 -- Tabs
-nmap("te", ":tabedit", "Open new tab")
+nmap("te", ":tabedit ", "Open new tab")
 nmap("<tab>", ":tabnext<Return>", "Next tab")
 nmap("<s-tab>", ":tabprev<Return>", "Previous tab")
 
