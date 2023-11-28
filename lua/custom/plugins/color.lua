@@ -44,6 +44,8 @@ return {
 				notify = true,
 				mini = false,
 				which_key = true,
+				coc_nvim = true,
+				mason = true,
 				native_lsp = {
 					enabled = true,
 					virtual_text = {
