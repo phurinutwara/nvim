@@ -106,6 +106,10 @@ require('lazy').setup({
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
+
+      -- See more: https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
+      'hrsh7th/cmp-path',
+      'https://github.com/hrsh7th/cmp-buffer'
     },
     opts = {
       window = {
@@ -591,8 +595,27 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
+    { name = 'nvim_lsp', keyword_length = 1 },
+    { name = 'luasnip',  keyword_length = 2 },
+    { name = 'buffer',   keyword_length = 3 },
+    { name = 'path' },
+  },
+  window = {
+    documentation = cmp.config.window.bordered()
+  },
+  formatting = {
+    fields = { 'menu', 'abbr', 'kind' },
+    format = function(entry, item)
+      local menu_icon = {
+        nvim_lsp = 'λ',
+        luasnip = '⋗',
+        buffer = 'Ω',
+        path = '🖫',
+      }
+
+      item.menu = menu_icon[entry.source.name]
+      return item
+    end
   },
 }
 
