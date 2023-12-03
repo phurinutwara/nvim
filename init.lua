@@ -654,7 +654,7 @@ cmp.setup {
         nvim_lsp = 'λ',
         luasnip = '⋗',
         buffer = 'Ω',
-        path = '🖫',
+        path = '',
       }
 
       item.menu = menu_icon[entry.source.name]
