@@ -55,8 +55,9 @@ imap("<C-c>", "<Esc>", "Quit insertion (ESC)")
 
 nmap("Q", "<nop>")
 nmap("<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-nmap("<leader>f", vim.lsp.buf.format, "[F]ormat")
-nmap("<leader>nf", "<cmd>Neoformat<CR>", "Neo[F]ormat")
+nmap("<leader>f", vim.lsp.buf.format, "[F]ormat with LSP")
+nmap("<leader>nf", "<cmd>Neoformat<CR>", "[N]eo[F]ormat")
+vmap("<leader>nf", "<cmd>'<,'>Neoformat<CR><ESC>", "[N]eo[F]ormat Selection")
 
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
