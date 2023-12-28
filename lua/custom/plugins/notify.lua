@@ -9,6 +9,6 @@ return {
 		})
 	end,
 	keys = {
-		{ "<leader>snd", require("notify").dismiss, desc = "Clear Notifications"},
+		{ "<leader>snd", require("notify").dismiss, desc = "Notify: Clear Notifications"},
 	}
 }
