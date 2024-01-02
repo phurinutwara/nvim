@@ -1,4 +1,5 @@
 return {
+	"famiu/bufdelete.nvim",
 	{
 		"akinsho/bufferline.nvim",
 		event = "VeryLazy",
@@ -15,6 +16,7 @@ return {
 			require("bufferline").setup {
 				highlights = require("catppuccin.groups.integrations.bufferline").get(),
 				options = {
+					mode = "buffers",
 					numbers = "buffer_id",
 					offsets = {
 						{
@@ -22,8 +24,8 @@ return {
 							text = "File Explorer",
 							seperator = true,
 						}
-					}
-					-- mode = "tabs",
+					},
+					close_command = require('bufdelete').bufdelete,
 					-- show_buffer_close_icons = false,
 					-- show_close_icon = false,
 				}

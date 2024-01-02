@@ -16,6 +16,8 @@ return {
 		-- set termguicolors to enable highlight groups
 		vim.opt.termguicolors = true
 
-		require("nvim-tree").setup {}
+		require("nvim-tree").setup {
+			disable_netrw = true
+		}
 	end,
 }
