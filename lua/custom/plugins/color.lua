@@ -9,7 +9,7 @@ return {
 				light = "latte",
 				dark = "mocha",
 			},
-			transparent_background = true, -- disables setting the background color.
+			transparent_background = false, -- disables setting the background color.
 			show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
 			term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
 			dim_inactive = {
@@ -68,28 +68,28 @@ return {
 			},
 		})
 
-		for _, element in ipairs({ 'FloatBorder', 'NormalFloat', 'Normal' }) do
-			vim.api.nvim_set_hl(0, element, { bg = 'none' })
-		end
-
-		-- LSP -> UI Customization: Borders
-		-- see more: https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#borders
-		local border = {
-			{ "╭", "FloatBorder" },
-			{ "─", "FloatBorder" },
-			{ "╮", "FloatBorder" },
-			{ "│", "FloatBorder" },
-			{ "╯", "FloatBorder" },
-			{ "─", "FloatBorder" },
-			{ "╰", "FloatBorder" },
-			{ "│", "FloatBorder" },
-		}
-		local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-		function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-			opts = opts or {}
-			opts.border = opts.border or border
-			return orig_util_open_floating_preview(contents, syntax, opts, ...)
-		end
+		-- for _, element in ipairs({ 'FloatBorder', 'NormalFloat', 'Normal' }) do
+		-- 	vim.api.nvim_set_hl(0, element, { bg = 'none' })
+		-- end
+		--
+		-- -- LSP -> UI Customization: Borders
+		-- -- see more: https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#borders
+		-- local border = {
+		-- 	{ "╭", "FloatBorder" },
+		-- 	{ "─", "FloatBorder" },
+		-- 	{ "╮", "FloatBorder" },
+		-- 	{ "│", "FloatBorder" },
+		-- 	{ "╯", "FloatBorder" },
+		-- 	{ "─", "FloatBorder" },
+		-- 	{ "╰", "FloatBorder" },
+		-- 	{ "│", "FloatBorder" },
+		-- }
+		-- local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+		-- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+		-- 	opts = opts or {}
+		-- 	opts.border = opts.border or border
+		-- 	return orig_util_open_floating_preview(contents, syntax, opts, ...)
+		-- end
 
 		-- setup must be called before loading
 		vim.cmd.colorscheme "catppuccin"
