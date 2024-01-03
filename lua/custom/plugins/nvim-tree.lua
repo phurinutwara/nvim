@@ -16,8 +16,14 @@ return {
 		-- set termguicolors to enable highlight groups
 		vim.opt.termguicolors = true
 
-		require("nvim-tree").setup {
-			disable_netrw = true
-		}
+		require("nvim-tree").setup({
+			disable_netrw = true,
+			update_focused_file = {
+				enable = true,
+			},
+			filters = {
+				git_ignored = false,
+			},
+		})
 	end,
 }
