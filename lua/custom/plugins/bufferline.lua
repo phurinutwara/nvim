@@ -17,7 +17,12 @@ return {
 				highlights = require("catppuccin.groups.integrations.bufferline").get(),
 				options = {
 					mode = "buffers",
-					numbers = "buffer_id",
+					numbers = function(opts)
+						return string.format('%s·%s',
+							opts.raise(opts.ordinal),
+							opts.lower(opts.id)
+						)
+					end,
 					offsets = {
 						{
 							filetype = "NvimTree",
