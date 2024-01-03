@@ -309,6 +309,12 @@ vim.o.termguicolors = true
 vim.o.wrap = false
 vim.o.colorcolumn = "80"
 
+-- Customize tab and indentation
+vim.o.shiftwidth = 2
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.expandtab = true
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
