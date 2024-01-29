@@ -111,24 +111,24 @@ require('lazy').setup({
 
       -- See more: https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
       'hrsh7th/cmp-path',
-      'https://github.com/hrsh7th/cmp-buffer'
+      'https://github.com/hrsh7th/cmp-buffer',
     },
     opts = {
       window = {
         completion = {
-          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-          winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+          winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None',
         },
         documentation = {
-          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-          winhighlight = "Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+          winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None',
         },
       },
     },
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -201,7 +201,7 @@ require('lazy').setup({
           {
             'filename',
             path = 1,
-          }
+          },
         },
       },
     },
@@ -307,7 +307,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 vim.o.wrap = false
-vim.o.colorcolumn = "80"
+vim.o.colorcolumn = '80'
 
 -- Customize tab and indentation
 vim.o.shiftwidth = 2
@@ -366,17 +366,17 @@ local function find_git_root()
   local current_dir
   local cwd = vim.fn.getcwd()
   -- If the buffer is not associated with a file, return nil
-  if current_file == "" then
+  if current_file == '' then
     current_dir = cwd
   else
     -- Extract the directory from the current file's path
-    current_dir = vim.fn.fnamemodify(current_file, ":h")
+    current_dir = vim.fn.fnamemodify(current_file, ':h')
   end
 
   -- Find the Git root directory from the current file's path
-  local git_root = vim.fn.systemlist("git -C " .. vim.fn.escape(current_dir, " ") .. " rev-parse --show-toplevel")[1]
+  local git_root = vim.fn.systemlist('git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel')[1]
   if vim.v.shell_error ~= 0 then
-    print("Not a git repository. Searching on current working directory")
+    print 'Not a git repository. Searching on current working directory'
     return cwd
   end
   return git_root
@@ -386,9 +386,9 @@ end
 local function live_grep_git_root()
   local git_root = find_git_root()
   if git_root then
-    require('telescope.builtin').live_grep({
-      search_dirs = {git_root},
-    })
+    require('telescope.builtin').live_grep {
+      search_dirs = { git_root },
+    }
   end
 end
 
@@ -420,7 +420,21 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'go', 'lua', 'python', 'rust', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'regex', 'markdown', 'markdown_inline', 'sql' },
+    ensure_installed = {
+      'bash',
+      'go',
+      'javascript',
+      'lua',
+      'markdown',
+      'markdown_inline',
+      'python',
+      'regex',
+      'rust',
+      'sql',
+      'typescript',
+      'vim',
+      'vimdoc',
+    },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = true,
@@ -553,7 +567,7 @@ require('mason-lspconfig').setup()
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  clangd = { filetypes = { 'c', 'cpp', 'cc' } },
+  -- clangd = { filetypes = { 'c', 'cpp', 'cc' } },
   gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
@@ -572,6 +586,11 @@ local servers = {
       },
     },
   },
+
+  stylua = {},
+  tailwindcss = {},
+  prettierd = {},
+  eslint = {},
 }
 
 -- Setup neovim lua configuration
@@ -613,7 +632,7 @@ cmp.setup {
     end,
   },
   completion = {
-    completeopt = 'menu,menuone,noinsert'
+    completeopt = 'menu,menuone,noinsert',
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -646,12 +665,12 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp', keyword_length = 1 },
-    { name = 'luasnip',  keyword_length = 2 },
-    { name = 'buffer',   keyword_length = 3 },
+    { name = 'luasnip', keyword_length = 2 },
+    { name = 'buffer', keyword_length = 3 },
     { name = 'path' },
   },
   window = {
-    documentation = cmp.config.window.bordered()
+    documentation = cmp.config.window.bordered(),
   },
   formatting = {
     fields = { 'menu', 'abbr', 'kind' },
@@ -665,7 +684,7 @@ cmp.setup {
 
       item.menu = menu_icon[entry.source.name]
       return item
-    end
+    end,
   },
 }
 
