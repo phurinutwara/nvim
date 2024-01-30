@@ -586,11 +586,6 @@ local servers = {
       },
     },
   },
-
-  stylua = {},
-  tailwindcss = {},
-  prettierd = {},
-  eslint = {},
 }
 
 -- Setup neovim lua configuration
