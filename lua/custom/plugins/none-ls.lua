@@ -57,7 +57,7 @@ return {
                 if not format_is_enabled then
                   return
                 end
-                vim.lsp.buf.format { bufnr = bufnr }
+                vim.lsp.buf.format { async = false }
               end,
             })
           end
