@@ -11,6 +11,7 @@ return {
       -- Config
       local config = {
         options = {
+          disabled_filetypes = { 'NvimTree' },
           -- Disable sections and component separators
           theme = catpuccin,
           component_separators = '|',
