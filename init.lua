@@ -125,18 +125,6 @@ require('lazy').setup({
       'hrsh7th/cmp-path',
       'https://github.com/hrsh7th/cmp-buffer',
     },
-    opts = {
-      window = {
-        completion = {
-          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-          winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None',
-        },
-        documentation = {
-          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-          winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None',
-        },
-      },
-    },
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -609,6 +597,10 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  -- LSP configuration for the rounded border documentation
+  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
 end
 
 -- document existing key chains
@@ -742,6 +734,7 @@ cmp.setup {
     { name = 'vim-dadbod-completion' },
   },
   window = {
+    completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
   formatting = {
