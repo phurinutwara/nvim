@@ -1,9 +1,12 @@
 return {
   {
+    'microsoft/vscode-js-debug',
+    build = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out',
+  },
+  {
     'mxsdev/nvim-dap-vscode-js',
     event = 'VeryLazy',
     dependencies = { 'mfussenegger/nvim-dap' },
-    build = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out',
     config = function()
       require('dap-vscode-js').setup {
         -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
