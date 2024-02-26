@@ -725,6 +725,25 @@ cmp.setup {
         fallback()
       end
     end, { 'i', 's' }),
+
+    -- Toggle completion
+    -- See more: https://github.com/hrsh7th/nvim-cmp/issues/429#issuecomment-954121524
+    ['<C-k>'] = cmp.mapping {
+      i = function()
+        if cmp.visible() then
+          cmp.abort()
+        else
+          cmp.complete()
+        end
+      end,
+      c = function()
+        if cmp.visible() then
+          cmp.close()
+        else
+          cmp.complete()
+        end
+      end,
+    },
   },
   sources = {
     { name = 'nvim_lsp', keyword_length = 1 },
