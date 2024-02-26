@@ -726,6 +726,7 @@ cmp.setup {
     { name = 'luasnip', keyword_length = 2 },
     { name = 'buffer', keyword_length = 3 },
     { name = 'path' },
+    { name = 'vim-dadbod-completion' },
   },
   window = {
     documentation = cmp.config.window.bordered(),
@@ -738,6 +739,7 @@ cmp.setup {
         luasnip = '⋗',
         buffer = 'Ω',
         path = '',
+        ['vim-dadbod-completion'] = '󰆼',
       }
 
       item.menu = menu_icon[entry.source.name]
