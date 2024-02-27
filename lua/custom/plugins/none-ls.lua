@@ -11,7 +11,6 @@ return {
 
       local ensure_installed = {
         'buf',
-        'eslint-lsp',
         'eslint_d',
         'js-debug-adapter',
         'prettierd',
