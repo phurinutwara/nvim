@@ -24,7 +24,7 @@ return {
         options = {
           mode = 'buffers',
           numbers = function(opts)
-            return string.format('%s·%s', opts.raise(opts.ordinal), opts.lower(opts.id))
+            return string.format('%s', opts.raise(opts.id))
           end,
           offsets = {
             {
