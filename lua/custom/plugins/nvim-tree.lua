@@ -35,9 +35,6 @@ return {
       filters = {
         git_ignored = false,
       },
-      view = {
-        width = 50,
-      },
     }
   end,
 }
