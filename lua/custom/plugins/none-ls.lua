@@ -11,7 +11,6 @@ return {
 
       local ensure_installed = {
         'buf',
-        'eslint_d',
         'js-debug-adapter',
         'prettierd',
         'stylua',
@@ -39,7 +38,6 @@ return {
         debug = true,
         sources = {
           null_ls.builtins.diagnostics.buf,
-          null_ls.builtins.diagnostics.eslint_d,
           null_ls.builtins.formatting.buf,
           null_ls.builtins.formatting.prettierd,
           null_ls.builtins.formatting.stylua,
