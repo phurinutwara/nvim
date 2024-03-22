@@ -27,6 +27,25 @@ return {
     end
     vim.keymap.set('n', '<leader>b', nvimTreeFocusOrToggle, { desc = 'Toggle sidebar' })
 
+    -- toggle the width and redraw
+    -- See more: https://github.com/nvim-tree/nvim-tree.lua/wiki/Recipes#toggle-adaptive-width
+    local VIEW_WIDTH_FIXED = 30
+    local view_width_max = VIEW_WIDTH_FIXED -- fixed to start
+    local function toggle_width_adaptive()
+      if view_width_max == -1 then
+        view_width_max = VIEW_WIDTH_FIXED
+      else
+        view_width_max = -1
+      end
+      print('Setting width adaptive to: ' .. tostring(view_width_max == -1 and true or false))
+      require('nvim-tree.api').tree.reload()
+    end
+    -- get current view width
+    local function get_view_width_max()
+      return view_width_max
+    end
+    vim.keymap.set('n', '<C-b>', toggle_width_adaptive, { desc = 'Toggle Adaptive Width' })
+
     require('nvim-tree').setup {
       disable_netrw = true,
       update_focused_file = {
@@ -34,6 +53,12 @@ return {
       },
       filters = {
         git_ignored = false,
+      },
+      view = {
+        width = {
+          min = 30,
+          max = get_view_width_max,
+        },
       },
     }
   end,
