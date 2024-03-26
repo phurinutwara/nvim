@@ -75,8 +75,4 @@ nmap("<leader>gs", vim.cmd.Git, "Open Vim-fugitive")
 -- nmap("<tab>", ":tabnext<Return>", "Next tab")
 -- nmap("<s-tab>", ":tabprev<Return>", "Previous tab")
 
--- Search for visually selected text
--- See more: https://vim.fandom.com/wiki/Search_for_visually_selected_text
-vmap("//", [[y/\V<C-R>=escape(@",'/\')<CR><CR>]], "Search in selected text")
-
 return {}
