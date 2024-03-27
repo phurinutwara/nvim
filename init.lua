@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -153,6 +153,14 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+-- Phurinut's Personal Config
+vim.opt.wrap = false
+vim.opt.colorcolumn = '80'
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -539,7 +547,7 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+        gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -548,7 +556,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
+        tsserver = {},
         --
 
         lua_ls = {
@@ -717,13 +725,50 @@ require('lazy').setup({
             end
           end, { 'i', 's' }),
 
+          -- Toggle completion
+          -- See more: https://github.com/hrsh7th/nvim-cmp/issues/429#issuecomment-954121524
+          ['<C-k>'] = cmp.mapping {
+            i = function()
+              if cmp.visible() then
+                cmp.abort()
+              else
+                cmp.complete()
+              end
+            end,
+            c = function()
+              if cmp.visible() then
+                cmp.close()
+              else
+                cmp.complete()
+              end
+            end,
+          },
+
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
+          { name = 'nvim_lsp', keyword_length = 1 },
+          { name = 'luasnip', keyword_length = 2 },
           { name = 'path' },
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        formatting = {
+          fields = { 'menu', 'abbr', 'kind' },
+          format = function(entry, item)
+            local menu_icon = {
+              nvim_lsp = 'λ',
+              luasnip = '⋗',
+              buffer = 'Ω',
+              path = '',
+            }
+
+            item.menu = menu_icon[entry.source.name]
+            return item
+          end,
         },
       }
     end,
@@ -836,7 +881,8 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
+  { import = 'custom.configs' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
