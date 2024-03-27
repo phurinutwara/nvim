@@ -1,19 +1,20 @@
 return {
   {
     'nvim-lualine/lualine.nvim',
+    enabled = false,
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
       local lualine = require 'lualine'
-      local catpuccin = require 'catppuccin.utils.lualine'()
+      -- local catpuccin = require 'catppuccin.utils.lualine'()
 
       -- Config
       local config = {
         options = {
           disabled_filetypes = { 'NvimTree' },
           -- Disable sections and component separators
-          theme = catpuccin,
+          -- theme = catpuccin,
           component_separators = '|',
           section_separators = {
             left = '',

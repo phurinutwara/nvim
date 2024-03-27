@@ -13,14 +13,14 @@ return {
       { '<C-S-Tab>', '<Cmd>tabprevious<CR>', desc = 'Prev tab' },
     },
     dependencies = {
-      'catppuccin',
+      -- 'catppuccin',
       'nvim-telescope/telescope.nvim',
     },
     config = function()
       require('scope').setup {}
       require('telescope').load_extension 'scope'
       require('bufferline').setup {
-        highlights = require('catppuccin.groups.integrations.bufferline').get(),
+        -- highlights = require('catppuccin.groups.integrations.bufferline').get(),
         options = {
           mode = 'buffers',
           numbers = function(opts)
