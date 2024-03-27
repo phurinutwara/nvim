@@ -729,6 +729,27 @@ require('lazy').setup({
             end
           end, { 'i', 's' }),
 
+          -- Phurinut's Personal Config
+          ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+
           -- Toggle completion
           -- See more: https://github.com/hrsh7th/nvim-cmp/issues/429#issuecomment-954121524
           ['<C-k>'] = cmp.mapping {
@@ -752,13 +773,10 @@ require('lazy').setup({
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
-          { name = 'nvim_lsp', keyword_length = 1 },
-          { name = 'luasnip', keyword_length = 2 },
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'buffer' },
           { name = 'path' },
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
         },
         formatting = {
           fields = { 'menu', 'abbr', 'kind' },
@@ -769,11 +787,14 @@ require('lazy').setup({
               buffer = 'Ω',
               path = '',
             }
-
             item.menu = menu_icon[entry.source.name]
             return item
           end,
         },
+        -- window = {
+        --   completion = cmp.config.window.bordered(),
+        --   documentation = cmp.config.window.bordered(),
+        -- },
       }
     end,
   },
