@@ -1,4 +1,5 @@
 return {
+  'nvim-neotest/nvim-nio',
   {
     'rcarriga/nvim-dap-ui',
     event = 'VeryLazy',
