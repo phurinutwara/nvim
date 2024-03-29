@@ -617,7 +617,7 @@ require('lazy').setup({
         local disable_filetypes = { c = true, cpp = true }
         return {
           timeout_ms = 500,
-          lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+          lsp_fallback = vim.g.format_is_enabled and not disable_filetypes[vim.bo[bufnr].filetype],
         }
       end,
       formatters_by_ft = {

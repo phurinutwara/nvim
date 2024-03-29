@@ -28,12 +28,6 @@ return {
       local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
       local null_ls = require 'null-ls'
 
-      local format_is_enabled = true
-      vim.api.nvim_create_user_command('AutoFormatToggle', function()
-        format_is_enabled = not format_is_enabled
-        print('Setting autoformatting to: ' .. tostring(format_is_enabled))
-      end, {})
-
       null_ls.setup {
         debug = true,
         sources = {
@@ -53,10 +47,9 @@ return {
               group = augroup,
               buffer = bufnr,
               callback = function()
-                if not format_is_enabled then
-                  return
+                if vim.g.format_is_enabled == true then
+                  vim.lsp.buf.format { async = false }
                 end
-                vim.lsp.buf.format { async = false }
               end,
             })
           end
