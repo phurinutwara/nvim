@@ -15,7 +15,6 @@ return {
         'prettierd',
         'stylua',
         'tailwindcss-language-server',
-        'black',
       }
 
       for _, item in ipairs(ensure_installed) do
