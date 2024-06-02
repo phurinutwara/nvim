@@ -59,6 +59,12 @@ return {
           min = 30,
           max = get_view_width_max,
         },
+        preserve_window_proportions = true,
+      },
+      actions = {
+        open_file = {
+          resize_window = false,
+        },
       },
     }
   end,
