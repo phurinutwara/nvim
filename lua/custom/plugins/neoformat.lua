@@ -1,6 +1,6 @@
 return {
-	{
-		'sbdchd/neoformat',
-		event = "VeryLazy",
-	}
+  {
+    'sbdchd/neoformat',
+    event = 'VeryLazy',
+  },
 }
