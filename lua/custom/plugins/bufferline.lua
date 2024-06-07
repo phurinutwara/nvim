@@ -9,8 +9,8 @@ return {
       { '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>', desc = 'Prev buffer' },
       { ']b', '<Cmd>BufferLineMoveNext<CR>', desc = 'Move to next buffer' },
       { '[b', '<Cmd>BufferLineMovePrev<CR>', desc = 'Move to previous buffer' },
-      { '<C-Tab>', '<Cmd>tabnext<CR>', desc = 'Next tab' },
-      { '<C-S-Tab>', '<Cmd>tabprevious<CR>', desc = 'Prev tab' },
+      { '<C-w><Tab>', '<Cmd>tabnext<CR>', desc = 'Next tab' },
+      { '<C-w><S-Tab>', '<Cmd>tabprevious<CR>', desc = 'Prev tab' },
     },
     dependencies = {
       -- 'catppuccin',
