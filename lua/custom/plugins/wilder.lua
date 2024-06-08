@@ -2,11 +2,8 @@ return {
   {
     'gelguy/wilder.nvim',
     dependencies = {
-      { 'roxma/vim-hug-neovim-rpc' },
-      {
-        'roxma/nvim-yarp',
-        build = 'cat requirements.txt | xargs python3 -m pip install ',
-      },
+      'roxma/vim-hug-neovim-rpc',
+      { 'roxma/nvim-yarp', build = 'python3 -m pip install pynvim' },
     },
     config = function()
       require('wilder').setup {
