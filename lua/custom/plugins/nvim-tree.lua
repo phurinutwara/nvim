@@ -15,7 +15,7 @@ return {
 
     -- Custom Mappings
     -- See more: https://github.com/nvim-tree/nvim-tree.lua#custom-mappings
-    my_on_attach = function(bufnr)
+    local my_on_attach = function(bufnr)
       local api = require 'nvim-tree.api'
 
       local function opts(desc)
@@ -87,6 +87,17 @@ return {
           resize_window = false,
         },
       },
+      renderer = {
+        indent_markers = {
+          enable = true,
+        },
+        icons = {
+          show = {
+            folder_arrow = false,
+          },
+        },
+      },
+
       on_attach = my_on_attach,
     }
   end,
