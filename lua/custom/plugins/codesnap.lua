@@ -16,9 +16,9 @@ return {
       breadcrumbs_separator = '/',
       title = 'CodeSnap.nvim',
       code_font_family = 'CaskaydiaCove Nerd Font',
-      watermark = 'CodeSnap.nvim',
+      watermark = '',
       watermark_font_family = 'Pacifico',
-      bg_theme = 'bamboo',
+      bg_color = '#535c68',
 
       min_width = 0,
     },
