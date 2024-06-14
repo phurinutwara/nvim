@@ -5,6 +5,9 @@ return {
   requires = {
     'nvim-tree/nvim-web-devicons',
   },
+  keys = {
+    { '<leader>b', [[:NvimTreeToggle<CR>]], { desc = 'Toggle sidebar' } },
+  },
   config = function()
     -- disable netrw at the very start of your init.lua
     vim.g.loaded_netrw = 1
@@ -43,7 +46,7 @@ return {
         nvimTree.tree.focus()
       end
     end
-    vim.keymap.set('n', '<leader>b', nvimTreeFocusOrToggle, { desc = 'Toggle sidebar' })
+    -- vim.keymap.set('n', '<leader>b', nvimTreeFocusOrToggle, { desc = 'Toggle sidebar' })
     ---------------------------------------------------------------------------
 
     -- Toggle the width and redraw
