@@ -7,6 +7,7 @@ return {
   },
   keys = {
     { '<leader>b', [[:NvimTreeToggle<CR>]], { desc = 'Toggle sidebar' } },
+    { '<leader>B', [[:NvimTreeFocus<CR>]], { desc = 'Focus sidebar' } },
   },
   config = function()
     -- disable netrw at the very start of your init.lua
