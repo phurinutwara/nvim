@@ -3,7 +3,7 @@ return {
     'gelguy/wilder.nvim',
     dependencies = {
       'roxma/vim-hug-neovim-rpc',
-      { 'roxma/nvim-yarp', build = 'python3 -m pip install pynvim' },
+      'roxma/nvim-yarp',
       'kyazdani42/nvim-web-devicons',
       'romgrk/fzy-lua-native',
     },
