@@ -7,10 +7,39 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      require('refactoring').setup()
+      local go = require 'custom.plugins.refactoring.languages.go'
+      local javascript = require 'custom.plugins.refactoring.languages.javascript'
 
-      -- load refactoring Telescope extension
-      require('telescope').load_extension 'refactoring'
+      require('refactoring').setup {
+        prompt_func_return_type = {
+          go = true,
+          java = false,
+
+          cpp = false,
+          c = false,
+          h = false,
+          hpp = false,
+          cxx = false,
+        },
+        prompt_func_param_type = {
+          go = true,
+          java = false,
+
+          cpp = false,
+          c = false,
+          h = false,
+          hpp = false,
+          cxx = false,
+        },
+        printf_statements = {},
+        print_var_statements = {
+          -- example: https://github.com/ThePrimeagen/refactoring.nvim/tree/master/lua/refactoring/tests/debug/print_var
+          go = { go.print_var_statements },
+          javascript = { javascript.print_var_statements },
+        },
+        show_success_message = true, -- shows a message with information about the refactor on success
+        -- i.e. [Refactor] Inlined 3 variable occurrences
+      }
     end,
     keys = {
       -- EX COMMAND ------------------------------------------------------------
@@ -80,7 +109,7 @@ return {
       {
         '<leader>rr',
         function()
-          require('telescope').extensions.refactoring.refactors()
+          require('refactoring').select_refactor()
         end,
         mode = { 'n', 'x' },
         desc = 'Refactoring: Refactoring with Telescope',
@@ -98,7 +127,7 @@ return {
         desc = 'Refactoring: Debug printf',
       },
       {
-        '<leader>rv',
+        '<leader>rl',
         function()
           require('refactoring').debug.print_var()
         end,
