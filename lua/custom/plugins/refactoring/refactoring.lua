@@ -44,7 +44,7 @@ return {
     keys = {
       -- EX COMMAND ------------------------------------------------------------
       {
-        '<leader>re',
+        '<leader>rE',
         function()
           require('refactoring').refactor 'Extract Function'
         end,
@@ -62,7 +62,7 @@ return {
         -- Extract function supports only visual mode
       },
       {
-        '<leader>rv',
+        '<leader>re',
         function()
           require('refactoring').refactor 'Extract Variable'
         end,
@@ -127,7 +127,7 @@ return {
         desc = 'Refactoring: Debug printf',
       },
       {
-        '<leader>rl',
+        '<leader>rv',
         function()
           require('refactoring').debug.print_var()
         end,
