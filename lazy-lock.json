@@ -13,6 +13,7 @@
   "conform.nvim": { "branch": "master", "commit": "5541c54cf2ab078a537838e1fb9d96ae47f71255" },
   "diffview.nvim": { "branch": "main", "commit": "3afa6a053f680e9f1329c4a151db988a482306cd" },
   "fidget.nvim": { "branch": "main", "commit": "ef99df04a1c53a453602421bc0f756997edc8289" },
+  "firenvim": { "branch": "master", "commit": "e412ab23c5b56b7eb3c361da8a1f8a2e94c51001" },
   "flash.nvim": { "branch": "main", "commit": "43f67935d388fbb540f8b40e8cbfd80de54f978a" },
   "friendly-snippets": { "branch": "main", "commit": "e11b09bf10706bb74e16e4c3d11b2274d62e687f" },
   "fzy-lua-native": { "branch": "master", "commit": "820f745b7c442176bcc243e8f38ef4b985febfaf" },
