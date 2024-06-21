@@ -1,5 +1,5 @@
 -- Global variable configuration
-vim.g.format_is_enabled = false
+vim.g.format_is_enabled = true
 
 -- Usable user command
 vim.api.nvim_create_user_command('AutoFormatToggle', function()
