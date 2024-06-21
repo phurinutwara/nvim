@@ -60,7 +60,7 @@ return {
       else
         view_width_max = -1
       end
-      print('Setting width adaptive to: ' .. tostring(view_width_max == -1 and true or false))
+      vim.notify('Setting width adaptive to: ' .. tostring(view_width_max == -1 and true or false), vim.log.levels.INFO)
       require('nvim-tree.api').tree.reload()
     end
     -- get current view width

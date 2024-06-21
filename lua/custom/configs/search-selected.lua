@@ -33,7 +33,7 @@ end
 
 function ToggleVeryLiteral()
   vim.g.VeryLiteral = not vim.g.VeryLiteral
-  print('Setting VeryLiteral to: ' .. tostring(vim.g.VeryLiteral))
+  vim.notify('Setting VeryLiteral to: ' .. tostring(vim.g.VeryLiteral), vim.log.levels.INFO)
 end
 
 function CopySelectingText(opt)

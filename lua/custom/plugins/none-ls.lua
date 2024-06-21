@@ -47,7 +47,7 @@ return {
               buffer = bufnr,
               callback = function()
                 if vim.g.format_is_enabled == true then
-                  vim.print 'auto formatted via null_ls'
+                  vim.notify 'auto formatted via null_ls'
                   vim.lsp.buf.format { async = false }
                 end
               end,
