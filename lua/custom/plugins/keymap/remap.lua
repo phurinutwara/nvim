@@ -54,10 +54,10 @@ vmap('<leader>d', [["_d]], '[D]elete without lose yank')
 imap('<C-c>', '<Esc>', 'Quit insertion (ESC)')
 
 nmap('Q', '<nop>')
-nmap('<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>')
-nmap('<leader>f', vim.lsp.buf.format, '[F]ormat with LSP')
-nmap('<leader>nf', '<cmd>Neoformat<CR>', '[N]eo[F]ormat')
-vmap('<leader>nf', ":'<,'>Neoformat<CR>", '[N]eo[F]ormat Selection')
+-- nmap('<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>')
+-- nmap('<leader>f', vim.lsp.buf.format, '[F]ormat with LSP')
+-- nmap('<leader>nf', '<cmd>Neoformat<CR>', '[N]eo[F]ormat')
+-- vmap('<leader>nf', ":'<,'>Neoformat<CR>", '[N]eo[F]ormat Selection')
 
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
@@ -71,8 +71,8 @@ nmap('<leader>X', '<cmd>!chmod +x %<CR>', 'Grant e[X]ecutable')
 nmap('<leader>gs', vim.cmd.Git, 'Open Vim-fugitive')
 
 -- windows resize (credit: https://www.reddit.com/r/neovim/comments/10wru1c/comment/j7osls8)
-vim.keymap.set('n', '=', [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
-vim.keymap.set('n', '-', [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
+vim.keymap.set('n', '=', [[<cmd>vertical resize +5<cr>]])   -- make the window biger vertically
+vim.keymap.set('n', '-', [[<cmd>vertical resize -5<cr>]])   -- make the window smaller vertically
 vim.keymap.set('n', '+', [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
 vim.keymap.set('n', '_', [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
 

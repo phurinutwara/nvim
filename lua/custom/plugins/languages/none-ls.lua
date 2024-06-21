@@ -42,15 +42,6 @@ return {
               group = augroup,
               buffer = bufnr,
             }
-            vim.api.nvim_create_autocmd('BufWritePre', {
-              group = augroup,
-              buffer = bufnr,
-              callback = function()
-                if vim.g.format_is_enabled == true then
-                  vim.lsp.buf.format { async = false }
-                end
-              end,
-            })
           end
         end,
       }
