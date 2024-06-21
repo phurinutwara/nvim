@@ -32,9 +32,9 @@ return {
         sources = {
           null_ls.builtins.diagnostics.buf,
           null_ls.builtins.formatting.buf,
-          null_ls.builtins.formatting.prettierd,
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.black,
+          -- null_ls.builtins.formatting.prettierd,
+          -- null_ls.builtins.formatting.stylua,
+          -- null_ls.builtins.formatting.black,
         },
         on_attach = function(client, bufnr)
           if client.supports_method 'textDocument/formatting' then
@@ -42,6 +42,16 @@ return {
               group = augroup,
               buffer = bufnr,
             }
+            vim.api.nvim_create_autocmd('BufWritePre', {
+              group = augroup,
+              buffer = bufnr,
+              callback = function()
+                if vim.g.format_is_enabled == true then
+                  vim.print 'auto formatted via null_ls'
+                  vim.lsp.buf.format { async = false }
+                end
+              end,
+            })
           end
         end,
       }
