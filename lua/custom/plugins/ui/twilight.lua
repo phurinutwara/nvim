@@ -11,12 +11,8 @@ return {
     },
     opts = {},
     config = function(opts)
-      require('twilight').setup { opts }
-
-      vim.api.nvim_create_autocmd({ 'BufEnter' }, {
-        pattern = { '*.*' },
-        command = [[TwilightEnable]],
-      })
+      local twilight = require 'twilight'
+      twilight.setup { opts }
     end,
   },
 }
