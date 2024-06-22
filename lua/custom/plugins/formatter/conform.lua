@@ -1,19 +1,11 @@
 return {
   {
     'stevearc/conform.nvim',
-    enabled = true,
     lazy = false,
-    keys = {
-      {
-
-        '<leader>f',
-        require('conform').format { async = true, lsp_fallback = true },
-        desc = '[F]ormat buffer (conform)',
-        mode = 'n',
-      },
-    },
     config = function()
-      require('conform').setup {
+      local conform = require 'conform'
+
+      conform.setup {
         notify_on_error = true,
         format_on_save = function(bufnr)
           -- Disable "format_on_save lsp_fallback" for languages that don't
@@ -41,6 +33,10 @@ return {
           -- javascript = { { "prettierd", "prettier" } },
         },
       }
+
+      vim.keymap.set('n', '<leader>f', function()
+        conform.format { async = true, lsp_fallback = true }
+      end, { desc = '[F]ormat buffer (conform)' })
     end,
   },
 }
