@@ -1,5 +1,8 @@
-local print_var_statements = 'fmt.Println(fmt.Sprintf("%s: %%+v", %s))'
+local statements = {
+  simple = 'fmt.Println(fmt.Sprintf("%s: %%+v", %s))',
+  verbose = 'fmt.Println(fmt.Sprintf("%s: %%#v", %s))',
+}
 
 return {
-  print_var_statements = print_var_statements,
+  statements = statements,
 }

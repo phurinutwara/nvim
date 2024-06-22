@@ -1,3 +1,19 @@
+local go = require 'custom.plugins.refactoring.languages.go'
+local javascript = require 'custom.plugins.refactoring.languages.javascript'
+
+local get_print_var_statements_by_mode = function(mode)
+  if mode ~= 'simple' and mode ~= 'verbose' then
+    mode = 'simple'
+  end
+
+  return {
+    print_var_statements = {
+      go = { go.statements[mode] },
+      javascript = { javascript.statements[mode] },
+    },
+  }
+end
+
 return {
   {
     'ThePrimeagen/refactoring.nvim',
@@ -7,9 +23,6 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      local go = require 'custom.plugins.refactoring.languages.go'
-      local javascript = require 'custom.plugins.refactoring.languages.javascript'
-
       require('refactoring').setup {
         prompt_func_return_type = {
           go = true,
@@ -34,8 +47,8 @@ return {
         printf_statements = {},
         print_var_statements = {
           -- example: https://github.com/ThePrimeagen/refactoring.nvim/tree/master/lua/refactoring/tests/debug/print_var
-          go = { go.print_var_statements },
-          javascript = { javascript.print_var_statements },
+          go = { go.statements.simple },
+          javascript = { javascript.statements.simple },
         },
         show_success_message = true, -- shows a message with information about the refactor on success
         -- i.e. [Refactor] Inlined 3 variable occurrences
@@ -133,6 +146,14 @@ return {
         end,
         mode = { 'n', 'x' },
         desc = 'Refactoring: Debug print_var',
+      },
+      {
+        '<leader>rV',
+        function()
+          require('refactoring').debug.print_var(get_print_var_statements_by_mode 'verbose')
+        end,
+        mode = { 'n', 'x' },
+        desc = 'Refactoring: Debug print_var (verbose)',
       },
       {
         '<leader>rc',
