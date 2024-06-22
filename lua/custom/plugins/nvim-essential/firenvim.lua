@@ -41,13 +41,13 @@ return {
       -- auto-save on text changed after timeout (ms): https://github.com/glacambre/firenvim#automatically-syncing-changes-to-the-page
       local TIMEOUT = 500
       local timer = vim.uv.new_timer() -- See more vim.uv: https://neovim.io/doc/user/lua.html#vim.uv
-      vim.api.nvim_create_autocmd({ 'TextChanged', 'TextChangedI' }, {
+      vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
         callback = function(e)
           timer:start(
             TIMEOUT,
             0,
             vim.schedule_wrap(function()
-              vim.cmd [[write]]
+              vim.cmd [[silent update]]
               timer = vim.uv.new_timer()
             end)
           )
