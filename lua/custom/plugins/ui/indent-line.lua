@@ -30,12 +30,13 @@ return {
       end)
 
       -- Multiple indent colors: https://github.com/lukas-reineke/indent-blankline.nvim#multiple-indent-colors
+      vim.g.rainbow_delimiters = { highlight = highlight }
       require('ibl').setup {
-        indent = {
-          highlight = highlight,
-        },
+        -- indent = {
+        --   highlight = highlight,
+        -- },
         scope = {
-          enabled = false,
+          highlight = highlight,
         },
       }
 
