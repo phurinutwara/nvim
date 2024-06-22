@@ -58,7 +58,7 @@ return {
       vim.api.nvim_create_autocmd({ 'UIEnter' }, {
         callback = function(e)
           vim.notify('nvim instance stated with firenvim', vim.log.levels.INFO)
-          vim.cmd [[set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h10]] -- https://forums.freebsd.org/threads/vim-set-guifont.79219/
+          vim.cmd [[set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h13]] -- https://forums.freebsd.org/threads/vim-set-guifont.79219/
           vim.g.format_is_enabled = false
           vim.g.go_fmt_autosave = 0
         end,

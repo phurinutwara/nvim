@@ -1,5 +1,6 @@
 return {
   'raghur/vim-ghost',
+  enabled = false,
   dependencies = {
     'roxma/nvim-yarp',
   },
