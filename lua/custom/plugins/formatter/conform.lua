@@ -37,6 +37,13 @@ return {
       vim.keymap.set('n', '<leader>f', function()
         conform.format { async = true, lsp_fallback = true }
       end, { desc = '[F]ormat buffer (conform)' })
+
+      require('conform').formatters.prettierd = {
+        command = 'prettierd',
+        env = {
+          PRETTIERD_DEFAULT_CONFIG = vim.fn.expand '~/.dotfiles/config/nvim/lua/custom/configs/formatter/.prettierrc.json',
+        },
+      }
     end,
   },
 }
