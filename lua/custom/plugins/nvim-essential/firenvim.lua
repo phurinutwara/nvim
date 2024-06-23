@@ -55,14 +55,14 @@ return {
       })
 
       -- set font for firenvim instance: https://github.com/glacambre/firenvim/issues/110#issuecomment-550137400
-      local base_fontsize = 17
+      local base_fontsize = 14
       vim.api.nvim_create_autocmd({ 'UIEnter' }, {
         callback = function(e)
           vim.notify('nvim instance stated with firenvim', vim.log.levels.INFO)
           vim.cmd([[set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h]] .. base_fontsize) -- https://forums.freebsd.org/threads/vim-set-guifont.79219/
           vim.g.format_is_enabled = false
           vim.g.go_fmt_autosave = 0
-          vim.cmd [[ZenMode]]
+          -- vim.cmd [[ZenMode]]
         end,
       })
 
