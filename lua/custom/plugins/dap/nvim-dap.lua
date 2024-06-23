@@ -100,6 +100,12 @@ return {
         linehl = 'DapBreakpoint',
         numhl = 'DapBreakpoint',
       })
+      vim.fn.sign_define('DapBreakpointCondition', {
+        text = '🟡',
+        texthl = 'DapBreakpointCondition',
+        linehl = 'DapBreakpointCondition',
+        numhl = 'DapBreakpointCondition',
+      })
     end,
   },
   { import = 'custom.plugins.dap.languages.go' },
