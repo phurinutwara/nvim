@@ -55,14 +55,33 @@ return {
       })
 
       -- set font for firenvim instance: https://github.com/glacambre/firenvim/issues/110#issuecomment-550137400
+      local base_fontsize = 17
       vim.api.nvim_create_autocmd({ 'UIEnter' }, {
         callback = function(e)
           vim.notify('nvim instance stated with firenvim', vim.log.levels.INFO)
-          vim.cmd [[set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h13]] -- https://forums.freebsd.org/threads/vim-set-guifont.79219/
+          vim.cmd([[set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h]] .. base_fontsize) -- https://forums.freebsd.org/threads/vim-set-guifont.79219/
           vim.g.format_is_enabled = false
           vim.g.go_fmt_autosave = 0
+          vim.cmd [[ZenMode]]
         end,
       })
+
+      vim.g.guifontsize = base_fontsize
+      vim.keymap.set('', '<C-=>', function()
+        vim.g.guifontsize = vim.g.guifontsize + 1
+        vim.print('Set font size to ' .. vim.g.guifontsize)
+        vim.cmd([[set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h]] .. vim.g.guifontsize)
+      end, { desc = 'Increase font size' })
+      vim.keymap.set('', '<C-->', function()
+        vim.g.guifontsize = vim.g.guifontsize - 1
+        vim.print('Set font size to ' .. vim.g.guifontsize)
+        vim.cmd([[set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h]] .. vim.g.guifontsize)
+      end, { desc = 'Decrease font size' })
+      vim.keymap.set('', '<C-0>', function()
+        vim.g.guifontsize = base_fontsize
+        vim.print('Set font size to ' .. vim.g.guifontsize)
+        vim.cmd([[set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h]] .. vim.g.guifontsize)
+      end, { desc = 'Reset font size' })
     end,
   },
 }
