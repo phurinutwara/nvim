@@ -5,7 +5,7 @@ return {
     'akinsho/toggleterm.nvim',
   },
   keys = {
-    { '<leader>gl', '<cmd>lua _lazygit_toggle()<CR>', { desc = 'Toggle [L]azy[G]it' } },
+    { '<leader>gl', '<cmd>lua _lazygit_toggle()<CR>', desc = 'Toggle [L]azy[G]it' },
   },
   config = function()
     local Terminal = require('toggleterm.terminal').Terminal
@@ -20,7 +20,8 @@ return {
 
       on_open = function(term)
         vim.notify_once(term.name)
-        vim.keymap.set('t', '<esc><esc>', [[<nop>]], { buffer = 0 })
+        vim.keymap.set('t', '<esc>', [[<esc>]], { buffer = term.bufnr })
+        vim.keymap.set('t', '<esc><esc>', [[<nop>]], { buffer = term.bufnr })
       end,
     }
 
