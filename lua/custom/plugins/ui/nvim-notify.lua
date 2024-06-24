@@ -7,7 +7,7 @@ return {
     lazy = false,
     keys = {
       {
-        '<leader>rs',
+        '<leader>snd',
         function()
           require('notify').dismiss {}
         end,
