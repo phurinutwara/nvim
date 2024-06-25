@@ -1,24 +1,3 @@
--- Search for selected text.
--- http://vim.wikia.com/wiki/VimTip171
---
--- See more: https://vim.fandom.com/wiki/Search_for_visually_selected_text
-
-local which_key = require 'which-key'
-
--- Global variable configuration
-vim.g.VeryLiteral = false
-
--- Key mapping
-which_key.register({
-  ['*'] = { [[:lua VSetSearch('/')<CR>]], 'Selected search: Next' },
-  ['#'] = { [[:lua VSetSearch('?')<CR>]], 'Selected search: Previous' },
-  ['<leader>e'] = { name = '[E]scape', _ = 'which_key_ignore' },
-  ['<leader>ey'] = { [[:lua CopySelectingText({register='*'})<CR>]], '[E]scape selecting text to Yank register' },
-}, { mode = 'v' })
-
--- Usable user command
-vim.api.nvim_create_user_command('VeryLiteralToggle', [[lua ToggleVeryLiteral()]], {})
-
 --------------------------------------------------------------------------------
 
 -- Forward declarations
@@ -93,4 +72,29 @@ Hello World!.
 -- -> VeryLiteral: false, More flexible indent position
 --    \VHello\_s\+World!\.
 
-return {}
+return {
+  'search-selected.lua',
+  dev = true,
+  config = function()
+    -- Search for selected text.
+    -- http://vim.wikia.com/wiki/VimTip171
+    --
+    -- See more: https://vim.fandom.com/wiki/Search_for_visually_selected_text
+
+    local which_key = require 'which-key'
+
+    -- Global variable configuration
+    vim.g.VeryLiteral = false
+
+    -- Key mapping
+    which_key.register({
+      ['*'] = { [[:lua VSetSearch('/')<CR>]], 'Selected search: Next' },
+      ['#'] = { [[:lua VSetSearch('?')<CR>]], 'Selected search: Previous' },
+      ['<leader>e'] = { name = '[E]scape', _ = 'which_key_ignore' },
+      ['<leader>ey'] = { [[:lua CopySelectingText({register='*'})<CR>]], '[E]scape selecting text to Yank register' },
+    }, { mode = 'v' })
+
+    -- Usable user command
+    vim.api.nvim_create_user_command('VeryLiteralToggle', [[lua ToggleVeryLiteral()]], {})
+  end,
+}
