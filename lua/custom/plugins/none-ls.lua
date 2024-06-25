@@ -24,7 +24,7 @@ return {
         end
       end
 
-      local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+      local augroup = vim.api.nvim_create_augroup('NoneLs', { clear = true })
       local null_ls = require 'null-ls'
 
       null_ls.setup {

@@ -15,6 +15,13 @@ return {
     -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
     vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
     vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+    vim.keymap.set('n', 'zK', function()
+      local winid = require('ufo').peekFoldedLinesUnderCursor()
+      if not winid then
+        -- choose one of coc.nvim and nvim lsp
+        vim.lsp.buf.hover()
+      end
+    end)
 
     -- Option 2: nvim lsp as LSP client
     -- Tell the server the capability of foldingRange,
@@ -68,5 +75,15 @@ return {
     }
 
     -- See more options at https://github.com/kevinhwang91/nvim-ufo?tab=readme-ov-file#minimal-configuration
+
+    -- tracking max foldlevel on open buffer
+    local augroup = vim.api.nvim_create_augroup('Ufo', { clear = false })
+    vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+      desc = 'Finds the highest foldlevel in the current file',
+      group = augroup,
+      callback = function()
+        -- vim.cmd [[let &foldlevel = max(map(range(1, line('$')), 'foldlevel(v:val)'))]] -- FIX: it always go zero
+      end,
+    })
   end,
 }

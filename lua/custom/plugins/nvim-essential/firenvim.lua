@@ -38,10 +38,13 @@ return {
         },
       }
 
+      local augroup = vim.api.nvim_create_augroup('Firenvim', { clear = true })
       -- auto-save on text changed after timeout (ms): https://github.com/glacambre/firenvim#automatically-syncing-changes-to-the-page
       local TIMEOUT = 500
       local timer = vim.uv.new_timer() -- See more vim.uv: https://neovim.io/doc/user/lua.html#vim.uv
       vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
+        desc = 'auto-save on text changed after timeout',
+        group = augroup,
         callback = function(e)
           timer:start(
             TIMEOUT,
@@ -57,6 +60,8 @@ return {
       -- set font for firenvim instance: https://github.com/glacambre/firenvim/issues/110#issuecomment-550137400
       local base_fontsize = 14
       vim.api.nvim_create_autocmd({ 'UIEnter' }, {
+        desc = 'set font for firenvim instance',
+        group = augroup,
         callback = function(e)
           vim.notify('nvim instance stated with firenvim', vim.log.levels.INFO)
           vim.cmd([[set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h]] .. base_fontsize) -- https://forums.freebsd.org/threads/vim-set-guifont.79219/

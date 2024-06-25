@@ -25,7 +25,10 @@ return {
       require('which-key').register {
         ['<leader>dt'] = { name = '[D]a[T]abase', _ = 'which_key_ignore' },
       }
+      local augroup = vim.api.nvim_create_augroup('Dadboi', { clear = false })
       vim.api.nvim_create_autocmd({ 'FileType' }, {
+        desc = 'Add completion to *.sql *.mysql *.plsql',
+        group = augroup,
         pattern = { 'sql', 'mysql', 'plsql' },
         callback = function()
           require('cmp').setup.buffer {
