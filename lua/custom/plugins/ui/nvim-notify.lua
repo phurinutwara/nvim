@@ -16,7 +16,7 @@ return {
     },
     config = function()
       require('notify').setup {
-        fps = 120,
+        fps = 30,
         render = 'wrapped-compact',
         minimum_width = 25,
       }
