@@ -19,3 +19,11 @@ return {
     enabled = false,
   },
 }
+
+-- NOTE: To adding suround without extra surrounding space
+--       e.g. word -> ( word )
+--       if you want word -> (word)
+--       you have to use ) instead of (
+--       also with } ] > instead of { [ <
+--
+--       See more: https://stackoverflow.com/a/9164449
