@@ -64,15 +64,15 @@ nmap('Q', '<nop>')
 -- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 -- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-nmap('<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], 'Fast [S]earch in buffer')
+nmap('<leader>S', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], 'Fast [S]earch in buffer')
 nmap('<leader>X', '<cmd>!chmod +x %<CR>', 'Grant e[X]ecutable')
 
 -- Vim-fugitive
 nmap('<leader>gs', vim.cmd.Git, 'Open Vim-fugitive')
 
 -- windows resize (credit: https://www.reddit.com/r/neovim/comments/10wru1c/comment/j7osls8)
-vim.keymap.set('n', '=', [[<cmd>vertical resize +5<cr>]])   -- make the window biger vertically
-vim.keymap.set('n', '-', [[<cmd>vertical resize -5<cr>]])   -- make the window smaller vertically
+vim.keymap.set('n', '=', [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
+vim.keymap.set('n', '-', [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
 vim.keymap.set('n', '+', [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
 vim.keymap.set('n', '_', [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
 
