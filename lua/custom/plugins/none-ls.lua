@@ -19,6 +19,9 @@ return {
         'docker-compose-language-service',
         'sonarlint-language-server',
         'checkmake',
+        'yq',
+        'yamllint',
+        'yamlfmt',
       }
 
       for _, item in ipairs(ensure_installed) do
