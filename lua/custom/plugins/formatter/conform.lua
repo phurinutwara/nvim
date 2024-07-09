@@ -29,6 +29,7 @@ return {
           sh = { 'shfmt' },
           bash = { 'shfmt' },
           zsh = { 'shfmt' },
+          graphql = { 'prettierd' },
           -- Conform can also run multiple formatters sequentially
           -- python = { "isort", "black" },
           --
@@ -45,7 +46,7 @@ return {
       require('conform').formatters.prettierd = {
         command = 'prettierd',
         env = {
-          PRETTIERD_DEFAULT_CONFIG = vim.fn.expand '~/.dotfiles/config/nvim/lua/custom/configs/formatter/.prettierrc.json',
+          PRETTIERD_DEFAULT_CONFIG = vim.fn.expand '~/.config/nvim/lua/custom/configs/formatter/.prettierrc.json',
         },
       }
     end,
