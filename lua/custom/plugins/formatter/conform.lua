@@ -25,7 +25,7 @@ return {
         formatters_by_ft = {
           lua = { 'stylua' },
           javascript = { 'prettierd' },
-          yaml = { 'yamlfmt' },
+          yaml = { { 'prettierd', 'yamlfmt' } },
           sh = { 'shfmt' },
           bash = { 'shfmt' },
           zsh = { 'shfmt' },
