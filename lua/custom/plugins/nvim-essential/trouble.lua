@@ -10,6 +10,11 @@ return {
         desc = 'Diagnostics (Trouble)',
       },
       {
+        '<leader>xt',
+        '<cmd>Trouble todo toggle<cr>',
+        desc = 'Todo (Trouble)',
+      },
+      {
         '<leader>xX',
         '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
         desc = 'Buffer Diagnostics (Trouble)',
