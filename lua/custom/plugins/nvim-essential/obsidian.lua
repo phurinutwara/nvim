@@ -15,6 +15,10 @@ return {
     'hrsh7th/nvim-cmp',
     'nvim-telescope/telescope.nvim',
   },
+  keys = {
+    { '<leader>orn', [[:ObsidianRename<CR><C-R>+]], desc = '[O]bsidian [R]e[n]ame from clipboard' },
+    { '<leader>orN', [[:ObsidianRename<CR>]], desc = '[O]bsidian hard [R]e[n]ame' },
+  },
   opts = {
     workspaces = {
       { name = 'second-brain', path = '~/vaults/second-brain' },
@@ -67,6 +71,7 @@ return {
     },
 
     note_id_func = function(title)
+      -- See also: https://github.com/epwalsh/obsidian.nvim?tab=readme-ov-file#configuration-options
       -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
       -- In this case a note with the title 'My new note' will be given an ID that looks
       -- like '1657296016-my-new-note', and therefore the file name '1657296016-my-new-note.md'
