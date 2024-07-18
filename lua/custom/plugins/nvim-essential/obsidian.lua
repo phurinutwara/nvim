@@ -1,15 +1,11 @@
+-- For more configurations
+-- See also: https://github.com/epwalsh/obsidian.nvim?tab=readme-ov-file#configuration-options
+
 return {
   'epwalsh/obsidian.nvim',
   version = '*',
   lazy = true,
   ft = 'markdown',
-  -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-  -- event = {
-  --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-  --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-  --   "BufReadPre path/to/my-vault/**.md",
-  --   "BufNewFile path/to/my-vault/**.md",
-  -- },
   dependencies = {
     'nvim-lua/plenary.nvim',
     'hrsh7th/nvim-cmp',
@@ -70,8 +66,10 @@ return {
       },
     },
 
+    -- Optional, customize how note IDs are generated given an optional title.
+    ---@param title string|?
+    ---@return string
     note_id_func = function(title)
-      -- See also: https://github.com/epwalsh/obsidian.nvim?tab=readme-ov-file#configuration-options
       -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
       -- In this case a note with the title 'My new note' will be given an ID that looks
       -- like '1657296016-my-new-note', and therefore the file name '1657296016-my-new-note.md'
@@ -86,6 +84,21 @@ return {
         end
       end
       return tostring(os.time()) .. '-' .. suffix
+    end,
+
+    -- Optional, customize how wiki links are formatted. You can set this to one of:
+    --  * "use_alias_only", e.g. '[[Foo Bar]]'
+    --  * "prepend_note_id", e.g. '[[foo-bar|Foo Bar]]'
+    --  * "prepend_note_path", e.g. '[[foo-bar.md|Foo Bar]]'
+    --  * "use_path_only", e.g. '[[foo-bar.md]]'
+    -- Or you can set it to a function that takes a table of options and returns a string, like this:
+    wiki_link_func = 'use_alias_only',
+
+    -- Optional, customize the default name or prefix when pasting images via `:ObsidianPasteImg`.
+    ---@return string
+    image_name_func = function()
+      -- Prefix image names with timestamp.
+      return string.format('%s-', os.time())
     end,
   },
 }
