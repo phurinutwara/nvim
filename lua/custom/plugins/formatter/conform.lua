@@ -1,7 +1,8 @@
 return {
   {
     'stevearc/conform.nvim',
-    lazy = false,
+    event = { 'BufWritePre' },
+    cmd = { 'ConformInfo' },
     config = function()
       local conform = require 'conform'
 
@@ -24,7 +25,7 @@ return {
         end,
         formatters_by_ft = {
           lua = { 'stylua' },
-          javascript = { 'prettierd' },
+          javascript = { 'prettierd', 'prettier', stop_after_first = true },
           yaml = { { 'prettierd', 'yamlfmt' } },
           sh = { 'shfmt' },
           bash = { 'shfmt' },

@@ -111,9 +111,12 @@ vim.opt.mouse = 'a'
 vim.opt.showmode = false
 
 -- Sync clipboard between OS and Neovim.
+--  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = 'unnamedplus'
+vim.schedule(function()
+  vim.opt.clipboard = 'unnamedplus'
+end)
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -216,9 +219,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
+  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
+  if vim.v.shell_error ~= 0 then
+    error('Error cloning lazy.nvim:\n' .. out)
+  end
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
@@ -289,19 +295,15 @@ require('lazy').setup({
   --     require('which-key').setup()
   --
   --     -- Document existing key chains
-  --     require('which-key').register {
-  --       ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  --       ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  --       ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  --       ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  --       ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-  --       ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-  --       ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+  --     require('which-key').add {
+  --       { '<leader>c', group = '[C]ode' },
+  --       { '<leader>d', group = '[D]ocument' },
+  --       { '<leader>r', group = '[R]ename' },
+  --       { '<leader>s', group = '[S]earch' },
+  --       { '<leader>w', group = '[W]orkspace' },
+  --       { '<leader>t', group = '[T]oggle' },
+  --       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
   --     }
-  --     -- visual mode
-  --     require('which-key').register({
-  --       ['<leader>h'] = { 'Git [H]unk' },
-  --     }, { mode = 'v' })
   --   end,
   -- },
 
@@ -417,7 +419,22 @@ require('lazy').setup({
     end,
   },
 
-  -- { -- LSP Configuration & Plugins
+  -- -- LSP Plugins
+  -- {
+  --   -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+  --   -- used for completion, annotations and signatures of Neovim apis
+  --   'folke/lazydev.nvim',
+  --   ft = 'lua',
+  --   opts = {
+  --     library = {
+  --       -- Load luvit types when the `vim.uv` word is found
+  --       { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+  --     },
+  --   },
+  -- },
+  -- { 'Bilal2453/luvit-meta', lazy = true },
+  -- {
+  --   -- Main LSP Configuration
   --   'neovim/nvim-lspconfig',
   --   dependencies = {
   --     -- Automatically install LSPs and related tools to stdpath for Neovim
@@ -429,9 +446,8 @@ require('lazy').setup({
   --     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
   --     { 'j-hui/fidget.nvim', opts = {} },
   --
-  --     -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-  --     -- used for completion, annotations and signatures of Neovim apis
-  --     { 'folke/neodev.nvim', opts = {} },
+  --     -- Allows extra capabilities provided by nvim-cmp
+  --     'hrsh7th/cmp-nvim-lsp',
   --   },
   --   config = function()
   --     -- Brief aside: **What is LSP?**
@@ -502,15 +518,11 @@ require('lazy').setup({
   --
   --         -- Rename the variable under your cursor.
   --         --  Most Language Servers support renaming across files, etc.
-  --         -- map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+  --         map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   --
   --         -- Execute a code action, usually your cursor needs to be on top of an error
   --         -- or a suggestion from your LSP for this to activate.
   --         map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-  --
-  --         -- Opens a popup that displays documentation about the word under your cursor
-  --         --  See `:help K` for why this keymap.
-  --         map('K', vim.lsp.buf.hover, 'Hover Documentation')
   --
   --         -- WARN: This is not Goto Definition, this is Goto Declaration.
   --         --  For example, in C this would take you to the header.
@@ -522,7 +534,7 @@ require('lazy').setup({
   --         --
   --         -- When you move your cursor, the highlights will be cleared (the second autocommand).
   --         local client = vim.lsp.get_client_by_id(event.data.client_id)
-  --         if client and client.server_capabilities.documentHighlightProvider then
+  --         if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
   --           local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
   --           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
   --             buffer = event.buf,
@@ -545,13 +557,13 @@ require('lazy').setup({
   --           })
   --         end
   --
-  --         -- The following autocommand is used to enable inlay hints in your
+  --         -- The following code creates a keymap to toggle inlay hints in your
   --         -- code, if the language server you are using supports them
   --         --
   --         -- This may be unwanted, since they displace some of your code
-  --         if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+  --         if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
   --           map('<leader>th', function()
-  --             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+  --             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
   --           end, '[T]oggle Inlay [H]ints')
   --         end
   --       end,
@@ -575,7 +587,7 @@ require('lazy').setup({
   --     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
   --     local servers = {
   --       -- clangd = {},
-  --       gopls = {},
+  --       -- gopls = {},
   --       -- pyright = {},
   --       -- rust_analyzer = {},
   --       -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -584,7 +596,7 @@ require('lazy').setup({
   --       --    https://github.com/pmizio/typescript-tools.nvim
   --       --
   --       -- But for many setups, the LSP (`tsserver`) will work just fine
-  --       tsserver = {},
+  --       -- tsserver = {},
   --       --
   --
   --       lua_ls = {
@@ -636,7 +648,8 @@ require('lazy').setup({
 
   -- { -- Autoformat
   --   'stevearc/conform.nvim',
-  --   lazy = false,
+  --   event = { 'BufWritePre' },
+  --   cmd = { 'ConformInfo' },
   --   keys = {
   --     {
   --       '<leader>f',
@@ -656,7 +669,7 @@ require('lazy').setup({
   --       local disable_filetypes = { c = true, cpp = true }
   --       return {
   --         timeout_ms = 500,
-  --         lsp_fallback = vim.g.format_is_enabled and not disable_filetypes[vim.bo[bufnr].filetype],
+  --         lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
   --       }
   --     end,
   --     formatters_by_ft = {
@@ -664,9 +677,8 @@ require('lazy').setup({
   --       -- Conform can also run multiple formatters sequentially
   --       -- python = { "isort", "black" },
   --       --
-  --       -- You can use a sub-list to tell conform to run *until* a formatter
-  --       -- is found.
-  --       -- javascript = { { "prettierd", "prettier" } },
+  --       -- You can use 'stop_after_first' to run the first available formatter from the list
+  --       -- javascript = { "prettierd", "prettier", stop_after_first = true },
   --     },
   --   },
   -- },

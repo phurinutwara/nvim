@@ -23,11 +23,7 @@ return {
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk' },
-      }
-      -- Visual mode
-      require('which-key').add {
-        { '<leader>h', desc = 'Git [H]unk', mode = 'v' },
+        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       }
 
       -- User Helper
