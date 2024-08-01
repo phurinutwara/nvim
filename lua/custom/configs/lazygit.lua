@@ -5,7 +5,7 @@ return {
     'akinsho/toggleterm.nvim',
   },
   keys = {
-    { '<leader>gl', '<cmd>lua _lazygit_toggle()<CR>', desc = 'Toggle [L]azy[G]it' },
+    { '<leader>lg', '<cmd>lua _lazygit_toggle()<CR>', desc = 'Toggle [L]azy[G]it' },
   },
   config = function()
     local Terminal = require('toggleterm.terminal').Terminal

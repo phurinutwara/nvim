@@ -21,8 +21,8 @@ return {
       vim.g.db_ui_auto_execute_table_helpers = 0 -- WARN: be careful to adjust this
     end,
     config = function()
-      require('which-key').register {
-        ['<leader>dt'] = { name = '[D]a[T]abase', _ = 'which_key_ignore' },
+      require('which-key').add {
+        { '<leader>dt', group = '[D]a[T]abase' },
       }
       local augroup = vim.api.nvim_create_augroup('Dadboi', { clear = false })
       vim.api.nvim_create_autocmd({ 'FileType' }, {

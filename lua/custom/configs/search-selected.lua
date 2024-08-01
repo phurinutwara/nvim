@@ -81,18 +81,17 @@ return {
     --
     -- See more: https://vim.fandom.com/wiki/Search_for_visually_selected_text
 
-    local which_key = require 'which-key'
-
     -- Global variable configuration
     vim.g.VeryLiteral = false
 
     -- Key mapping
-    which_key.register({
-      ['*'] = { [[:lua VSetSearch('/')<CR>]], 'Selected search: Next' },
-      ['#'] = { [[:lua VSetSearch('?')<CR>]], 'Selected search: Previous' },
-      ['<leader>e'] = { name = '[E]scape', _ = 'which_key_ignore' },
-      ['<leader>ey'] = { [[:lua CopySelectingText({register='*'})<CR>]], '[E]scape selecting text to Yank register' },
-    }, { mode = 'v' })
+    require('which-key').add {
+      mode = 'v',
+      { '*', [[:lua VSetSearch('/')<CR>]], desc = 'Selected search: Next' },
+      { '#', [[:lua VSetSearch('?')<CR>]], desc = 'Selected search: Previous' },
+      { '<leader>e', group = '[E]scape' },
+      { '<leader>ey', [[:lua CopySelectingText({register='*'})<CR>]], desc = '[E]scape selecting text to Yank register' },
+    }
 
     -- Usable user command
     vim.api.nvim_create_user_command('VeryLiteralToggle', [[lua ToggleVeryLiteral()]], {})
