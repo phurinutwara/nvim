@@ -36,6 +36,27 @@ return {
       'hrsh7th/cmp-path',
       'onsails/lspkind.nvim',
     },
+    keys = {
+      {
+        '<C-S-K>',
+        [[<cmd>CmpToggle<cr>]],
+        desc = 'Toggle nvim-cmp',
+        mode = { 'n', 'i' },
+      },
+    },
+    init = function()
+      -- Toggle nvim-cmp
+      -- TODO: Add NvimCmpEnabled status on miniline
+      vim.g.NvimCmpEnabled = true
+
+      function ToggleNvimCmp()
+        vim.g.NvimCmpEnabled = not vim.g.NvimCmpEnabled
+        vim.notify('Setting NvimCmpEnabled to: ' .. tostring(vim.g.NvimCmpEnabled), vim.log.levels.INFO)
+        vim.cmd [[lua require('cmp').setup.buffer { enabled = vim.g.NvimCmpEnabled }]]
+      end
+
+      vim.api.nvim_create_user_command('CmpToggle', [[lua ToggleNvimCmp()]], {})
+    end,
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
