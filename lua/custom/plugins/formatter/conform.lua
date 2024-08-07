@@ -3,6 +3,16 @@ return {
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
+    keys = {
+      {
+        '<leader>f',
+        function()
+          require('conform').format { async = true, lsp_fallback = true }
+        end,
+        desc = '[F]ormat buffer (conform)',
+        mode = { 'n' },
+      },
+    },
     config = function()
       local conform = require 'conform'
 
@@ -39,10 +49,6 @@ return {
           -- javascript = { { "prettierd", "prettier" } },
         },
       }
-
-      vim.keymap.set('n', '<leader>f', function()
-        conform.format { async = true, lsp_fallback = true }
-      end, { desc = '[F]ormat buffer (conform)' })
 
       require('conform').formatters.prettierd = {
         command = 'prettierd',
