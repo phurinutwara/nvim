@@ -1,6 +1,7 @@
 return {
   'lazygit.lua',
   dev = true,
+  enabled = false,
   dependencies = {
     'akinsho/toggleterm.nvim',
   },
