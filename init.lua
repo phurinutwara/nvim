@@ -160,7 +160,7 @@ vim.opt.scrolloff = 10
 
 -- Phurinut's Personal Config
 vim.opt.wrap = false
-vim.opt.colorcolumn = '0'
+vim.opt.colorcolumn = '120'
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2

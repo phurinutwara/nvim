@@ -1,6 +1,7 @@
 return {
   {
     'm4xshen/smartcolumn.nvim',
+    enabled = false,
     config = function()
       require('smartcolumn').setup {
         disabled_filetypes = { 'NvimTree', 'lazy', 'mason', 'help', 'checkhealth', 'lspinfo', 'noice', 'Trouble', 'fish', 'zsh' },
