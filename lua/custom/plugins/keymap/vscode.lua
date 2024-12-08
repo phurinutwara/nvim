@@ -9,12 +9,6 @@ if vim.g.vscode then
   vim.g.mapleader = ' '
   vim.g.maplocalleader = ' '
 
-  -- yank to system clipboard
-  keymap({ 'n', 'v' }, '<leader>y', '"+y', opts)
-
-  -- paste from system clipboard
-  keymap({ 'n', 'v' }, '<leader>p', '"+p', opts)
-
   -- better indent handling
   keymap('v', '<', '<gv', opts)
   keymap('v', '>', '>gv', opts)
@@ -25,9 +19,10 @@ if vim.g.vscode then
   keymap('x', 'J', ":move '>+1<CR>gv-gv", opts)
   keymap('x', 'K', ":move '<-2<CR>gv-gv", opts)
 
-  -- paste preserves primal yanked piece
-  keymap('v', 'p', '"_dP', opts)
-  keymap({ 'n', 'v' }, '<leader>d', [["_d"]], opts)
+  -- action without lose yank
+  keymap('x', '<leader>p', [["_dP]], opts)
+  keymap('v', '<leader>p', [["_dP]], opts)
+  keymap('v', '<leader>d', [["_d]], opts)
 
   -- removes highlighting after escaping vim search
   keymap('n', '<Esc>', ':nohlsearch<CR>', opts)
@@ -43,11 +38,8 @@ if vim.g.vscode then
   keymap({ 'n', 'v' }, '<leader>b', function()
     vscode.action 'workbench.action.toggleSidebarVisibility'
   end)
-  keymap({ 'n', 'v' }, '<leader>db', function()
+  keymap('n', '<leader>db', function()
     vscode.action 'editor.debug.action.toggleBreakpoint'
-  end)
-  keymap({ 'n', 'v' }, '<leader>d', function()
-    vscode.action 'editor.action.showHover'
   end)
   keymap({ 'n', 'v' }, '<leader>a', function()
     vscode.action 'editor.action.quickFix'
@@ -64,9 +56,6 @@ if vim.g.vscode then
   keymap({ 'n', 'v' }, '<leader>cp', function()
     vscode.action 'workbench.action.showCommands'
   end)
-  keymap({ 'n', 'v' }, '<leader>pr', function()
-    vscode.action 'code-runner.run'
-  end)
   keymap({ 'n', 'v' }, '<leader>f', function()
     vscode.action 'editor.action.formatDocument'
   end)
@@ -74,6 +63,12 @@ if vim.g.vscode then
     vscode.action 'editor.action.refactor'
   end, opts)
   keymap('n', '<leader>"', ':registers<CR>', opts)
+  -- keymap({ 'n', 'v' }, '<leader>d', function()
+  --   vscode.action 'editor.action.showHover'
+  -- end)
+  -- keymap({ 'n', 'v' }, '<leader>pr', function()
+  --   vscode.action 'code-runner.run'
+  -- end)
 
   -- git stuffs
   keymap('n', '<leader>hp', function()
