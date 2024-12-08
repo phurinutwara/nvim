@@ -8,7 +8,7 @@ if vim.g.vscode then
   vim.opt.inccommand = 'split'
   vim.opt.number = false
   vim.opt.relativenumber = false
-  vim.opt.timeoutlen = 350
+  vim.opt.timeoutlen = 375
   vim.opt.undofile = true
   vim.opt.updatetime = 250
   vim.opt.hlsearch = true

@@ -1,9 +1,9 @@
-local vscode = require 'vscode'
-
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 if vim.g.vscode then
+  local vscode = require 'vscode'
+
   -- remap leader key
   keymap('n', '<Space>', '', opts)
   vim.g.mapleader = ' '
@@ -73,7 +73,18 @@ if vim.g.vscode then
   keymap({ 'n', 'x' }, '<leader>re', function()
     vscode.action 'editor.action.refactor'
   end, opts)
-  keymap('n', '<leader>"', ':regsters<CR>', opts)
+  keymap('n', '<leader>"', ':registers<CR>', opts)
+
+  -- git stuffs
+  keymap('n', '<leader>hp', function()
+    vscode.action 'gitlens.toggleFileChanges'
+  end, opts)
+  keymap({ 'n', 'v', 'x' }, '<leader>hs', function()
+    vscode.action 'git.stageSelectedRanges'
+  end, opts)
+  keymap({ 'n', 'v', 'x' }, '<leader>hr', function()
+    vscode.action 'git.revertSelectedRanges'
+  end, opts)
 
   vim.schedule(function()
     print 'vscode keymap loaded'
