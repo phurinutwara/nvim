@@ -21,7 +21,7 @@ if vim.g.vscode then
   end)
 
   -- load keymap for vscode-neovim instance
-  require 'lua.custom.plugins.keymap.vscode'
+  require 'custom.plugins.keymap.vscode'
 
   -- install `lazy.nvim` plugin manager
   -- see `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
