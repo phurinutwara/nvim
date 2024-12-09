@@ -1,4 +1,5 @@
 local vscode = require 'vscode'
+local vscodeKeymap = require 'custom.plugins.keymap.vscode'
 
 -- =========================== .:entrance for VSCode Neovim:. ===========================
 -- see more https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim
@@ -8,10 +9,11 @@ if vim.g.vscode then
   vim.opt.inccommand = 'split'
   vim.opt.number = false
   vim.opt.relativenumber = false
-  vim.opt.timeoutlen = 375
   vim.opt.undofile = true
   vim.opt.updatetime = 250
   vim.opt.hlsearch = true
+  vim.opt.wrap = false
+  -- vim.opt.timeoutlen = 420
 
   -- sync clipboard between OS and Neovim.
   --  schedule the setting after `UiEnter` because it can increase startup-time.
@@ -21,7 +23,7 @@ if vim.g.vscode then
   end)
 
   -- load keymap for vscode-neovim instance
-  require 'custom.plugins.keymap.vscode'
+  vscodeKeymap.init()
 
   -- install `lazy.nvim` plugin manager
   -- see `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info

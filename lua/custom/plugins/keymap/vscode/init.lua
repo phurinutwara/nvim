@@ -1,9 +1,18 @@
+local vscode
+if vim.g.vscode then
+  vscode = require 'vscode'
+end
+
+local M = {}
+
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
-if vim.g.vscode then
-  local vscode = require 'vscode'
+-- forward declaration
+local git = require 'custom.plugins.keymap.vscode.git'
+local fold = require 'custom.plugins.keymap.vscode.fold'
 
+function M.init()
   -- remap leader key
   keymap('n', '<Space>', '', opts)
   vim.g.mapleader = ' '
@@ -19,10 +28,22 @@ if vim.g.vscode then
   keymap('x', 'J', ":move '>+1<CR>gv-gv", opts)
   keymap('x', 'K', ":move '<-2<CR>gv-gv", opts)
 
-  -- action without lose yank
+  -- actions without lose yank
+  -- delete
+  keymap('v', '<leader>d', [["_d]], opts)
+  -- paste
   keymap('x', '<leader>p', [["_dP]], opts)
   keymap('v', '<leader>p', [["_dP]], opts)
-  keymap('v', '<leader>d', [["_d]], opts)
+  -- change
+  keymap('v', '<leader>c', function()
+    local mode = vim.fn.mode()
+    print('mode is ' .. mode)
+    if mode == 'v' then
+      return '"_di' -- visual mode
+    elseif mode == 'V' then
+      return '_"_dO' -- visual line mode
+    end
+  end, { expr = true, remap = true })
 
   -- removes highlighting after escaping vim search
   keymap('n', '<Esc>', ':nohlsearch<CR>', opts)
@@ -53,9 +74,6 @@ if vim.g.vscode then
   keymap({ 'n', 'v' }, '<leader>ff', function()
     vscode.action 'workbench.action.quickOpen'
   end)
-  keymap({ 'n', 'v' }, '<leader>cp', function()
-    vscode.action 'workbench.action.showCommands'
-  end)
   keymap({ 'n', 'v' }, '<leader>f', function()
     vscode.action 'editor.action.formatDocument'
   end)
@@ -63,6 +81,9 @@ if vim.g.vscode then
     vscode.action 'editor.action.refactor'
   end, opts)
   keymap('n', '<leader>"', ':registers<CR>', opts)
+  -- keymap({ 'n', 'v' }, '<leader>cp', function()
+  --   vscode.action 'workbench.action.showCommands'
+  -- end)
   -- keymap({ 'n', 'v' }, '<leader>d', function()
   --   vscode.action 'editor.action.showHover'
   -- end)
@@ -71,25 +92,19 @@ if vim.g.vscode then
   -- end)
 
   -- git stuffs
-  keymap('n', '<leader>hp', function()
-    vscode.action 'gitlens.toggleFileChanges'
-  end, opts)
-  keymap({ 'n', 'v', 'x' }, '<leader>hs', function()
-    vscode.action 'git.stageSelectedRanges'
-  end, opts)
-  keymap({ 'n', 'v', 'x' }, '<leader>hr', function()
-    vscode.action 'git.revertSelectedRanges'
-  end, opts)
-  keymap('n', ']c', function()
-    vscode.action 'workbench.action.editor.nextChange'
-  end, opts)
-  keymap('n', '[c', function()
-    vscode.action 'workbench.action.editor.previousChange'
-  end, opts)
+  git.init()
+
+  -- folds
+  -- see more https://github.com/vscode-neovim/vscode-neovim/issues/58
+  fold.init()
 
   vim.schedule(function()
     print 'vscode keymap loaded'
   end)
 end
 
-return {}
+if vim.g.vscode then
+  return M
+else
+  return {}
+end
