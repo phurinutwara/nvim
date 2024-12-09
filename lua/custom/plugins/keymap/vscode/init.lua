@@ -76,6 +76,8 @@ function M.init()
     vscode.action 'editor.action.refactor'
   end, opts)
   keymap('n', '<leader>"', ':registers<CR>', opts)
+  keymap('n', '<leader>X', '<cmd>!chmod +x %<CR>')
+
   -- keymap({ 'n', 'v' }, '<leader>cp', function()
   --   vscode.action 'workbench.action.showCommands'
   -- end)
