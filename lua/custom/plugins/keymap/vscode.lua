@@ -80,6 +80,12 @@ if vim.g.vscode then
   keymap({ 'n', 'v', 'x' }, '<leader>hr', function()
     vscode.action 'git.revertSelectedRanges'
   end, opts)
+  keymap('n', ']c', function()
+    vscode.action 'workbench.action.editor.nextChange'
+  end, opts)
+  keymap('n', '[c', function()
+    vscode.action 'workbench.action.editor.previousChange'
+  end, opts)
 
   vim.schedule(function()
     print 'vscode keymap loaded'
