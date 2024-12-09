@@ -32,6 +32,12 @@ function M.init()
     vscode.action 'editor.toggleFold'
   end, opts)
 
+  for i = 1, 7 do
+    keymap('n', 'z' .. i, function()
+      vscode.action('editor.foldLevel' .. i)
+    end, opts)
+  end
+
   -- fix vertical movements break folding
   keymap('n', 'k', function()
     return _moveCursor 'k'
