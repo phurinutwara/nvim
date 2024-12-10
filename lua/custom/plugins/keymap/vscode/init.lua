@@ -44,11 +44,9 @@ function M.init()
   keymap('n', '<Esc>', ':nohlsearch<CR>', opts)
 
   -- call vscode commands from neovim
-  keymap({ 'n', 'x' }, '<leader>r', function()
-    vscode.with_insert(function()
-      vscode.action 'editor.action.refactor'
-    end)
-  end)
+  keymap({ 'n', 'x' }, '<leader>rn', function()
+    vscode.action 'editor.action.rename'
+  end, opts)
 
   -- general keymaps
   keymap({ 'n', 'v' }, '<leader>b', function()
@@ -72,7 +70,7 @@ function M.init()
   keymap({ 'n', 'v' }, '<leader>f', function()
     vscode.action 'editor.action.formatDocument'
   end)
-  keymap({ 'n', 'x' }, '<leader>re', function()
+  keymap({ 'n', 'x' }, '<leader>rf', function()
     vscode.action 'editor.action.refactor'
   end, opts)
   keymap('n', '<leader>"', ':registers<CR>', opts)
