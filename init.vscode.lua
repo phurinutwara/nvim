@@ -40,6 +40,7 @@ local function main()
       'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
       { 'numToStr/Comment.nvim', opts = {} }, -- "gc" to comment visual regions/lines
       { import = 'custom.plugins.motion.nvim-surround' },
+      { import = 'custom.plugins.motion.mini' },
       { import = 'custom.plugins.motion.swap' },
     }
 
