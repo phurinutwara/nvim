@@ -17,6 +17,10 @@ local function main()
     vim.opt.wrap = false
     -- vim.opt.timeoutlen = 420
 
+    -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+    vim.opt.ignorecase = true
+    vim.opt.smartcase = true
+
     -- indent setting
     vim.opt.shiftwidth = 2
     vim.opt.tabstop = 2
