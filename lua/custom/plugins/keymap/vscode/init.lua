@@ -75,6 +75,15 @@ function M.init()
   end, opts)
   keymap('n', '<leader>"', ':registers<CR>', opts)
   keymap('n', '<leader>X', '<cmd>!chmod +x %<CR>')
+  keymap('n', '<leader>mm', function()
+    vscode.action 'bookmarks.toggle'
+  end, opts)
+  keymap('n', '<leader>ml', function()
+    vscode.action 'bookmarks.list'
+  end, opts)
+  keymap('n', '<leader>ma', function()
+    vscode.action 'bookmarks.listFromAllFiles'
+  end, opts)
 
   -- keymap({ 'n', 'v' }, '<leader>cp', function()
   --   vscode.action 'workbench.action.showCommands'
