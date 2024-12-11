@@ -47,6 +47,11 @@ function M.init()
   keymap({ 'n', 'x' }, '<leader>rn', function()
     vscode.action 'editor.action.rename'
   end, opts)
+  keymap({ 'n', 'x' }, '<leader>rN', function()
+    vscode.with_insert(function()
+      vscode.call 'editor.action.changeAll'
+    end)
+  end, opts)
 
   -- general keymaps
   keymap({ 'n', 'v' }, '<leader>b', function()
@@ -71,7 +76,9 @@ function M.init()
     vscode.action 'editor.action.formatDocument'
   end)
   keymap({ 'n', 'x' }, '<leader>rf', function()
-    vscode.action 'editor.action.refactor'
+    vscode.with_insert(function()
+      vscode.call 'editor.action.refactor'
+    end)
   end, opts)
   keymap('n', '<leader>"', ':registers<CR>', opts)
   keymap('n', '<leader>X', '<cmd>!chmod +x %<CR>')
