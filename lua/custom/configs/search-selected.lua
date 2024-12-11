@@ -72,28 +72,27 @@ Hello World!.
 -- -> VeryLiteral: false, More flexible indent position
 --    \VHello\_s\+World!\.
 
-return {
-  'search-selected.lua',
-  dev = true,
-  config = function()
-    -- Search for selected text.
-    -- http://vim.wikia.com/wiki/VimTip171
-    --
-    -- See more: https://vim.fandom.com/wiki/Search_for_visually_selected_text
+-- Search for selected text.
+-- http://vim.wikia.com/wiki/VimTip171
+--
+-- See more: https://vim.fandom.com/wiki/Search_for_visually_selected_text
 
-    -- Global variable configuration
-    vim.g.VeryLiteral = false
+local function main()
+  -- Global variable configuration
+  vim.g.VeryLiteral = false
 
-    -- Key mapping
-    require('which-key').add {
-      mode = 'v',
-      { '*', [[:lua VSetSearch('/')<CR>]], desc = 'Selected search: Next' },
-      { '#', [[:lua VSetSearch('?')<CR>]], desc = 'Selected search: Previous' },
-      { '<leader>e', group = '[E]scape' },
-      { '<leader>ey', [[:lua CopySelectingText({register='*'})<CR>]], desc = '[E]scape selecting text to Yank register' },
-    }
+  -- Key mapping
+  require('which-key').add {
+    mode = 'v',
+    { '*', [[:lua VSetSearch('/')<CR>]], desc = 'Selected search: Next' },
+    { '#', [[:lua VSetSearch('?')<CR>]], desc = 'Selected search: Previous' },
+    { '<leader>e', group = '[E]scape' },
+    { '<leader>ey', [[:lua CopySelectingText({register='*'})<CR>]], desc = '[E]scape selecting text to Yank register' },
+  }
 
-    -- Usable user command
-    vim.api.nvim_create_user_command('VeryLiteralToggle', [[lua ToggleVeryLiteral()]], {})
-  end,
-}
+  -- Usable user command
+  vim.api.nvim_create_user_command('VeryLiteralToggle', [[lua ToggleVeryLiteral()]], {})
+end
+main()
+
+return {}
