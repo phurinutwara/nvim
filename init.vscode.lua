@@ -17,6 +17,12 @@ local function main()
     vim.opt.wrap = false
     -- vim.opt.timeoutlen = 420
 
+    -- indent setting
+    vim.opt.shiftwidth = 2
+    vim.opt.tabstop = 2
+    vim.opt.softtabstop = 2
+    vim.opt.expandtab = true
+
     -- remap leader key
     vim.keymap.set('n', '<Space>', '', { noremap = true, silent = true })
     vim.g.mapleader = ' '
